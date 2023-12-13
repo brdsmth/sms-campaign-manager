@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manager-deployment
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: manager
+  template:
+    metadata:
+      labels:
+        app: manager
+    spec:
+      containers:
+      - name: manager
+        image: manager-image:latest
+        # This field is used to specify when Kubernetes should pull images from a registry
+        # For locally built images this field isn't necessary
+        # image: your-docker-registry/manager-image:latest  # Replace with image URL
+        # imagePullPolicy: Always
+        ports:
+        - containerPort: 8080  # The port the SMS Campaign Manager service listens on
