@@ -1,0 +1,49 @@
+scalar DateTime
+
+# Campaigns
+type Campaign {
+  _id: String!
+  name: String!
+  startTime: DateTime!
+}
+
+input NewCampaign {
+  name: String!
+  startTime: DateTime!
+}
+
+# Segments
+type Segment {
+  _id: String!
+  name: String!
+  description: String!
+}
+
+input NewSegment {
+  name: String!
+  description: String!
+}
+
+# Templates
+type Template {
+  _id: String!
+  name: String!
+  content: String!
+}
+
+input NewTemplate {
+  name: String!
+  content: String!
+}
+
+type Query {
+  campaigns: [Campaign!]!
+  segments: [Segment!]!
+  templates: [Template!]!
+}
+
+type Mutation {
+  createCampaign(input: NewCampaign!): Campaign!
+  createSegment(input: NewSegment!): Segment!
+  createTemplate(input: NewTemplate!): Template!
+}
