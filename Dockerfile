@@ -1,8 +1,14 @@
 # Use an official Go runtime as a parent image
-FROM golang:1.16
+FROM golang:1.21
 
 # Set the working directory inside the container
 WORKDIR /app
+
+# Copy the go.mod and go.sum files first to leverage Docker cache
+COPY go.mod go.sum ./
+
+# Download the dependencies
+RUN go mod download
 
 # Copy the Go application source code into the container
 COPY . .
